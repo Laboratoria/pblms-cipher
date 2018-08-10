@@ -19,7 +19,7 @@ else
 	eslint_return=0
 fi
 echo starting unit-test
-./node_modules/.bin/mocha --reporter json > ./tmp/unitTestMessage.json
+./node_modules/.bin/mocha --reporter json ./test/cipher.spec.js > ./tmp/unitTestMessage.json
 if [ $? -eq 1 ]
 then
 	echo unit-test ko
