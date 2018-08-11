@@ -47,26 +47,23 @@ let fs5 = new Promise ((resolve) => {fs.readFile('./tmp/unitTestFail.txt', 'utf-
 })});
 
 const sendFilesToDB = (obj) => {
+	console.log(obj)
     fetch ('https://laboratoria-la-dev-maia.firebaseapp.com/submissions', {
         method: 'POST',
         body: JSON.stringify(obj),
-    })
+    }).then((res) => {return res.json()}).then((res) => {console.log(res)}).catch((res) => {console.log('catc==>', res)});
 }
 
-fs1.then((data) => {
-    obj.githubLink=data;
-    fs2.then((data) => {
-        obj.response.eslintMessage=JSON.parse(data);
-        fs3.then((data) => {
-            obj.response.eslintFail=data;
-            fs4.then((data) => {
-                obj.response.unitTestMessage=JSON.parse(data);
-                fs5.then((data) => {
-                    obj.response.unitTestFail=data;
-                    sendFilesToDB(obj);
-                })
-            })
-        })
-    })
-})
-
+Promise.all([fs1, fs2, fs3, fs4, fs5])
+    .then(([githubLink, eslintMessage, eslintFail, unitTestMessage, unitTestFail ]) => {
+        const data = {
+            githubLink,
+            response: {
+                eslintFail,
+                eslintMessage: JSON.parse(eslintMessage),
+                unitTestFail,
+                unitTestMessage: JSON.parse(unitTestMessage)
+            }
+        };
+        sendFilesToDB(data);
+    });

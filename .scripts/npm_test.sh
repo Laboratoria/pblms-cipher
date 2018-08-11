@@ -31,5 +31,5 @@ else
 fi
 echo $eslint_return > ./tmp/eslintFail.txt
 echo $unit_test_return > ./tmp/unitTestFail.txt
-echo $(git config --get remote.origin.url) > ./tmp/gitPath.txt
+echo https://github.com/$TRAVIS_PULL_REQUEST_SLUG.git > ./tmp/gitPath.txt
 exit $return_code;
