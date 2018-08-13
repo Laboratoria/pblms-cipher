@@ -1,8 +1,6 @@
 #!/bin/bash
 
 return_code=0;
-lint_arg="-f json"
-test_arg="--reporter json"
 
 if [ -d tmp ]
 then
@@ -12,7 +10,7 @@ else
 fi
 echo starting linter
 npm run --silent linter:json > ./tmp/eslintMessage.json
-if [ $? != 1 ]
+if [ $? != 0 ]
 then
 	echo eslint ko
 	return_code=1
