@@ -1,6 +1,9 @@
 #!/bin/bash
 
 return_code=0;
+lint_arg="-f json"
+test_arg="--reporter json"
+
 if [ -d tmp ]
 then
 	echo 'tmp exist'
@@ -8,8 +11,8 @@ else
 	mkdir ./tmp
 fi
 echo starting linter
-./node_modules/.bin/eslint -f json */*.js > ./tmp/eslintMessage.json
-if [ $? -eq 1 ]
+npm run --silent linter:json > ./tmp/eslintMessage.json
+if [ $? != 1 ]
 then
 	echo eslint ko
 	return_code=1
@@ -19,8 +22,8 @@ else
 	eslint_return=0
 fi
 echo starting unit-test
-./node_modules/.bin/mocha --reporter json ./test/cipher.spec.js > ./tmp/unitTestMessage.json
-if [ $? -eq 1 ]
+npm run --silent unit-test:json > ./tmp/unitTestMessage.json
+if [ $? != 0 ]
 then
 	echo unit-test ko
 	return_code=1
