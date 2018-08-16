@@ -41,8 +41,8 @@ describe('cipher', () => {
      it('debería retornar "ejemplo #1" para "lqltwsv #4" con offset 33',() =>{
       expect(cipher.decode(33,"lqltwsv #4")).toBe("ejemplo #1"); 
      }); 
-    
-     
+
+  });
 
   describe('cipher.createCipherWithOffset', () => {
 
@@ -54,8 +54,6 @@ describe('cipher', () => {
       expect((cipher.createCipherWithOffset(33)).encode("abc")).toBe(cipher.encode(33,"abc"))
     });
     
-
   });
-});
 
 });
