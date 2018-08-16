@@ -10,7 +10,7 @@
     "test-browser": "opener ./test/index.html",
     "test-node": "nyc mocha ./test/headless.js",
     "test": "npm run test-node && npm run test-browser",
-    "linter:json": "eslint -f json .js src/ test/",
+    "linter:json": "./node_modules/.bin/eslint -f json .js src/ test/",
     "unit-test:json": "jest --json"
   },
   "dependencies": {
