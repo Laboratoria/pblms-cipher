@@ -50,6 +50,9 @@ const sendFilesToDB = (obj) => {
 	console.log(obj)
     fetch ('https://laboratoria-la-dev-ivan.firebaseapp.com/submissions', {
         method: 'POST',
+	headers: {
+	    'Content-Type': 'application/json',
+	},
         body: JSON.stringify(obj),
     }).then((res) => {return res.json()}).then((res) => {console.log(res)}).catch((res) => {console.log('catc==>', res)});
 }
