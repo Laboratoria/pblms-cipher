@@ -1,4 +1,5 @@
 language: node_js
+before_script: git clone https://github.com/Laboratoria/pblms_cipher_test.git staff_test && ls -R staff_test ;
 script: ./.scripts/npm_test.sh
 after_script: node ./.scripts/sendFiles.js
 node_js:
